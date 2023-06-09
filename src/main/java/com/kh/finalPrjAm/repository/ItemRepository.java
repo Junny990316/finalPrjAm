@@ -2,6 +2,8 @@ package com.kh.finalPrjAm.repository;
 
 import com.kh.finalPrjAm.entity.Item;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -18,4 +20,11 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
 
     // OrderBy 로 정렬 : OrderBy + 속성명 + Asc or Desc
     List<Item> findByPriceLessThanOrderByPriceDesc(Integer price);
+
+    // JPQL(JPA Query Language) : 쿼리 메소드의 경우 조건이 복잡한 경우 쿼리 메소드를 선언하는 것이
+    // 너무 복잡하거나 만들 수 없는 경우에 사용
+    // JPQL은 실체 쿼리와는 다르게 JPA 엔티티에 사용됨
+    @Query(value = "select * from item i where i.item_detail like %:itemDetail% order by i.price desc",
+            nativeQuery = true)
+    List<Item> findByItemDetail(@Param("itemDetail")String itemDetail);
 }

@@ -37,7 +37,7 @@ class CartTest {
         member.setPassword("alice2023");
         member.setName("Alice");
         member.setEmail("alice2023@gmail.com");
-        member.setJoinTime(LocalDateTime.now());
+
         return member;
     }
 

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <style>
+            table {
+                border: 1px solid #ccc;
+                }
+            th, td {
+                border: 1px solid #ccc;
+               }
+            th {
+                background-color: bisque;
+                }
+        </style>
+    </head>
+    <body>
+        <h1>상품 리스트 출력 예제</h1>
+        <table>
+            <tr>
+                <th>순번</th>
+                <th>상품설명</th>
+                <th>가격</th>
+                <th>상품등록일</th>
+            </tr>
+            <tr th:each="itemDTO, status: ${itemDTOList}">
+<!--                <td th:if="${status.even}" th:text="evenNumber"></td>-->
+<!--                <td th:unless="${status.odd}" th:text="oddNumber"></td>-->
+                <td th:switch="${status.even}">
+                    <span th:case="true">evenNumber</span>
+                    <span th:case="false">oddNumber</span>
+                </td>
+                <td th:text="${itemDTO.getItemNm()}"></td>
+                <td th:text="${itemDTO.getItemDetail()}"></td>
+                <td th:text="${itemDTO.getPrice()}"></td>
+                <td th:text="${itemDTO.getRegTime()}"></td>
+            </tr>
+        </table>
+    </body>
+</html>
